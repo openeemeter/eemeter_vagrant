@@ -1,0 +1,61 @@
+# Add apt repo for python3
+sudo add-apt-repository ppa:fkrull/deadsnakes
+sudo apt-get update
+
+# libpq-dev, python-dev: necessary for compiling C extensions
+sudo apt-get install -y \
+  gfortran \
+  git-core \
+  htop \
+  libatlas-base-dev \
+  libblas-dev \
+  libcurl4-gnutls-dev \
+  liblapack-dev \
+  libpq-dev \
+  libssl-dev \
+  libxml2-dev \
+  libxslt-dev \
+  libxslt1-dev \
+  lib32z1-dev \
+  postgresql \
+  postgresql-contrib \
+  python-dev \
+  python-tk \
+  python3-dev \
+  python3-lxml \
+  python3.5-dev \
+  python3.5 \
+  python-pip \
+  python3-pip \
+  zlib1g-dev  
+
+# Make sure latest version of pip
+wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+
+sudo pip3 install lxml
+sudo pip3 install setuptools —-upgrade
+
+sudo pip install memory_profiler \
+                 numpy==1.10.2 \
+                 pandas==0.18.0 \
+                 scipy \
+                 supervisor \
+                 virtualenv \
+                 xlrd
+
+sudo pip install --upgrade pyopenssl
+sudo pip install eemeter
+
+# Database Setup
+sudo -u postgres psql -c "CREATE USER eemeter WITH PASSWORD 'eemeter' SUPERUSER;"
+sudo -u postgres createdb eemeter_store
+
+# Jump right into the dev DB CLI with `psql`
+echo 'alias psql="sudo -u postgres psql eemeter"' >> ~/.bash_profile
+
+# And load configs in .bashrc too
+echo 'source ~/.bashrc' >> ~/.bash_profile
+
+# Default starting directory
+echo 'cd /vagrant' >> ~/.bash_profile
