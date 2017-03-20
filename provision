@@ -45,7 +45,24 @@ sudo pip install memory_profiler \
                  xlrd
 
 sudo pip install --upgrade pyopenssl
-sudo pip install eemeter
+
+# Create a virtual environment for each repository
+# Create a virtual environment for each repository
+cd ~
+if [ ! -d venvs ]; then
+  mkdir venvs
+fi
+rm -rf venvs/* # Clear out the old venvs
+cd venvs
+virtualenv --system-site-packages "eemeter"
+
+cd /vagrant/eemeter
+source ~/venvs/eemeter/bin/activate
+git clone https://github.com/openeemeter/eemeter.git
+cd /vagrant/eemeter/eemeter
+pip install -e .
+pip install -r dev_requirements.txt
+deactivate
 
 # Database Setup
 sudo -u postgres psql -c "CREATE USER eemeter WITH PASSWORD 'eemeter' SUPERUSER;"
