@@ -29,6 +29,7 @@ Install
 
 Vagrant may ask for an administrator password.
 
-*eemeter* code is checked out/installed in a virtualenv accessed by
+*eemeter* code is checked out/installed on machine, try running the tests here:
 
-    cd /vagrant/eemeter
+    cd /vagrant/eemeter/eemeter
+    py.test
