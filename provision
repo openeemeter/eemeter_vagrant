@@ -56,6 +56,10 @@ rm -rf venvs/* # Clear out the old venvs
 cd venvs
 virtualenv --system-site-packages "eemeter"
 
+# autoenv
+git clone git://github.com/kennethreitz/autoenv.git ~/.autoenv
+echo 'source ~/.autoenv/activate.sh' >> ~/.bash_profile
+
 cd /vagrant/eemeter
 source ~/venvs/eemeter/bin/activate
 git clone https://github.com/openeemeter/eemeter.git
