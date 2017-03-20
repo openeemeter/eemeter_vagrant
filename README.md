@@ -28,3 +28,7 @@ Install
     vagrant ssh
 
 Vagrant may ask for an administrator password.
+
+*eemeter* code is checked out/installed in a virtualenv accessed by
+
+    cd /vagrant/eemeter
