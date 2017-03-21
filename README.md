@@ -31,5 +31,5 @@ Vagrant may ask for an administrator password.
 
 *eemeter* code is checked out/installed on machine, try running the tests here:
 
-    cd /vagrant/eemeter/eemeter
+    cd /vagrant/eemeter
     py.test
