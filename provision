@@ -22,20 +22,19 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # install supported python versions and create a virtualenv
-/home/vagrant/.pyenv/bin/pyenv install 3.6.0
-/home/vagrant/.pyenv/bin/pyenv install 3.5.2
-/home/vagrant/.pyenv/bin/pyenv install 3.4.5
-/home/vagrant/.pyenv/bin/pyenv install 2.7.13
-/home/vagrant/.pyenv/bin/pyenv virtualenv 3.6.0 eemeter3.6.0
+pyenv install 3.6.0
+pyenv install 3.5.2
+pyenv install 3.4.5
+pyenv install 2.7.13
+pyenv virtualenv 3.6.0 eemeter3.6.0
 
 cd /vagrant
 git clone https://github.com/openeemeter/eemeter.git
 
-echo 'eemeter3.6.0' > /vagrant/eemeter/.python-version
-echo 'cd /vagrant/eemeter' >> ~/.bash_profile
-
 cd /vagrant/eemeter
+pyenv local eemeter3.6.0 3.6.0 3.5.2 3.4.5 2.7.13
 pip install -e .
 pip install -r dev_requirements.txt
 pip install notebook
-/home/vagrant/.pyenv/bin/pyenv local eemeter3.6.0 3.6.0 3.5.2 3.4.5 2.7.13
+
+echo 'cd /vagrant/eemeter' >> ~/.bash_profile
