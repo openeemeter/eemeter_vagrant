@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# install binaries
 sudo apt-get update
 sudo apt-get install -y \
   libbz2-dev \
@@ -7,8 +8,10 @@ sudo apt-get install -y \
   libxml2-dev \
   libxslt-dev
 
+# pyenv installation
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
+# add necessary pyenv initialization to .bash_profile
 cat << "EOF" >> ~/.bash_profile
 
 # pyenv
@@ -17,24 +20,28 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 EOF
 
+# also be able to use pyenv in this script
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-# install supported python versions and create a virtualenv
+# install supported python versions and create a virtualenv for 3.6.0
 pyenv install 3.6.0
 pyenv install 3.5.2
 pyenv install 3.4.5
 pyenv install 2.7.13
 pyenv virtualenv 3.6.0 eemeter3.6.0
 
+# clone eemeter
 cd /vagrant
 git clone https://github.com/openeemeter/eemeter.git
 
+# install eemeter requirements
 cd /vagrant/eemeter
-pyenv local eemeter3.6.0 3.6.0 3.5.2 3.4.5 2.7.13
+pyenv local eemeter3.6.0 3.6.0 3.5.2 3.4.5 2.7.13  # use virtualenv by default but allow tox to access other python versions
 pip install -e .
 pip install -r dev_requirements.txt
 pip install notebook
 
+# start new sessions in eemeter folder
 echo 'cd /vagrant/eemeter' >> ~/.bash_profile
