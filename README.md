@@ -59,9 +59,16 @@ To run a tutorial jupyter notebook, use the command
 
     jupyter notebook --ip=0.0.0.0 --no-browser
 
+Copy and paste the URL provided (something like `http://0.0.0.0:8888/?token=some_text`)
+into your web browser.
+
 Open to the notebook `docs/eemeter_basic_usage.ipynb` to run through the
 tutorial. Some steps will take a little longer than normal as weather data is
 automatically pulled in for you.
+
+If you encounter an error connecting to `0.0.0.0:8888` you can also try connecting to
+`http://localhost:8888` - when prompted for a password or token, copy and paste the text
+from the URL after `token=`.
 
 Rebuild
 ---
